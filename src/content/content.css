@@ -1,10 +1,11 @@
 .ths-ext-card { position: relative; }
 
+/* Below the site's own top-left labels ("LOW APPLICATIONS" etc.), which would otherwise cover the buttons. */
 .ths-ext-controls {
   position: absolute;
-  top: 8px;
+  top: 44px;
   left: 8px;
-  z-index: 30;
+  z-index: 40;
   display: flex;
   gap: 4px;
   align-items: center;
@@ -47,8 +48,9 @@
 .ths-ext-badge[hidden] { display: none; }
 
 .ths-ext-interested { outline: 3px solid #2e9d5b; outline-offset: 2px; border-radius: 12px; }
-.ths-ext-rejected { opacity: 0.4; transition: opacity 0.15s; }
-.ths-ext-rejected:hover { opacity: 1; }
+/* Dim the card's own content, not our controls, so the red badge stays readable. */
+.ths-ext-rejected > :not(.ths-ext-controls) { opacity: 0.4; transition: opacity 0.15s; }
+.ths-ext-rejected:hover > :not(.ths-ext-controls) { opacity: 1; }
 .ths-ext-rejected img { filter: grayscale(1); }
 
 #ths-ext-bar {
