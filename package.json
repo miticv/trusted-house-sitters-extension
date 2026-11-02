@@ -1,0 +1,9 @@
+{
+  "name": "ths-listing-marker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome extension to mark TrustedHousesitters listings as interested / not interested",
+  "scripts": {
+    "test": "node --test \"test/*.test.js\""
+  }
+}
