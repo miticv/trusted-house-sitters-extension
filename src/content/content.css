@@ -47,7 +47,9 @@
 }
 .ths-ext-badge[hidden] { display: none; }
 
-.ths-ext-interested { outline: 3px solid #2e9d5b; outline-offset: 2px; border-radius: 12px; }
+.ths-ext-interested,
+.ths-ext-rejected { outline: 3px solid #2e9d5b; outline-offset: 2px; border-radius: 12px; }
+.ths-ext-rejected { outline-color: #c62828; }
 /* Dim the card's own content, not our controls, so the red badge stays readable. */
 .ths-ext-rejected > :not(.ths-ext-controls) { opacity: 0.4; transition: opacity 0.15s; }
 .ths-ext-rejected:hover > :not(.ths-ext-controls) { opacity: 1; }
