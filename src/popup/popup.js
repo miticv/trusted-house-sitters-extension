@@ -6,7 +6,7 @@
   const $ = (id) => document.getElementById(id);
   const inTab = new URLSearchParams(location.search).has('tab');
   const state = {
-    tab: 'not_interested',
+    tab: inTab ? 'backup' : 'not_interested', // the full-tab page is opened for importing
     text: '',
     reason: '',
     marks: {},
@@ -46,11 +46,12 @@
     for (const tab of document.querySelectorAll('[data-tab]')) {
       tab.setAttribute('aria-selected', String(tab.dataset.tab === state.tab));
     }
-    const isReasons = state.tab === 'reasons';
-    $('list-view').hidden = isReasons;
-    $('reasons-view').hidden = !isReasons;
-    if (isReasons) renderReasons();
-    else renderList(all);
+    const view = state.tab === 'reasons' || state.tab === 'backup' ? state.tab : 'list';
+    $('list-view').hidden = view !== 'list';
+    $('reasons-view').hidden = view !== 'reasons';
+    $('backup-view').hidden = view !== 'backup';
+    if (view === 'reasons') renderReasons();
+    else if (view === 'list') renderList(all);
   }
 
   function renderList(all) {

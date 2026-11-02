@@ -33,6 +33,7 @@ button.danger { border: 1px solid #c62828; border-radius: 6px; background: #fff;
 #add-reason { display: flex; gap: 6px; margin-top: 8px; }
 #add-reason input { flex: 1; }
 
-footer { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid #ddd; }
-#message { flex-basis: 100%; min-height: 1em; margin: 4px 0 0; color: #2e7d32; }
+#backup-view p { margin-top: 0; }
+.backup-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#message { min-height: 1em; margin: 8px 0 0; color: #2e7d32; }
 #message.error { color: #c62828; }
