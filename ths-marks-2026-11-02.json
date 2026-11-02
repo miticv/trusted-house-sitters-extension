@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "marks": {
+    "1631953": {
+      "location": "Göteborg, Sweden",
+      "markedAt": "2026-11-02T22:22:13.162Z",
+      "note": "",
+      "reasons": [],
+      "status": "interested",
+      "title": "Looking for a cat sitter for Desi",
+      "url": "https://www.trustedhousesitters.com/house-and-pet-sitting-assignments/sweden/vaestra-goetaland/goteborg/l/1631953/"
+    },
+    "1647686": {
+      "location": "Holycross, Ireland",
+      "markedAt": "2026-11-02T22:22:18.536Z",
+      "note": "",
+      "reasons": [
+        "too_many_pets"
+      ],
+      "status": "not_interested",
+      "title": "Spend time in the heart of Ireland, with an adorable companion!",
+      "url": "https://www.trustedhousesitters.com/house-and-pet-sitting-assignments/ireland/munster/holycross/l/1647686/"
+    },
+    "3161362": {
+      "location": "Grassington, United Kingdom",
+      "markedAt": "2026-11-02T22:22:04.020Z",
+      "note": "",
+      "reasons": [],
+      "status": "interested",
+      "title": "Come and stay in the beautiful Yorkshire Dales and look after our two Labradors",
+      "url": "https://www.trustedhousesitters.com/house-and-pet-sitting-assignments/united-kingdom/england/grassington/l/3161362/"
+    }
+  },
+  "reasons": [
+    {
+      "id": "too_many_pets",
+      "label": "Too many pets"
+    },
+    {
+      "id": "pet_type",
+      "label": "Pet type"
+    },
+    {
+      "id": "other",
+      "label": "Other"
+    }
+  ]
+}
