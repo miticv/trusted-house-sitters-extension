@@ -4,24 +4,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const zlib = require('node:zlib');
+const { crc32 } = require('./crc32.js');
 
 const SIZES = [16, 32, 48, 128];
 const TEAL = [0x00, 0x39, 0x39];
 const WHITE = [0xff, 0xff, 0xff];
 const RED = [0xc6, 0x28, 0x28];
 const SAMPLES = 4; // per axis, for anti-aliasing
-
-const CRC_TABLE = Array.from({ length: 256 }, (_, n) => {
-  let c = n;
-  for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
-  return c >>> 0;
-});
-
-function crc32(buf) {
-  let c = 0xffffffff;
-  for (const byte of buf) c = CRC_TABLE[(c ^ byte) & 0xff] ^ (c >>> 8);
-  return (c ^ 0xffffffff) >>> 0;
-}
 
 function chunk(type, data) {
   const out = Buffer.alloc(12 + data.length);
