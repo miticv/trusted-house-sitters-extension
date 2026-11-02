@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "THS Listing Marker",
+  "version": "0.1.0",
+  "description": "Mark TrustedHousesitters sit listings as interested or not interested, and see those marks on every search.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "THS Listing Marker",
+    "default_popup": "src/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.trustedhousesitters.com/*"],
+      "js": [
+        "src/lib/listing-id.js",
+        "src/lib/store.js",
+        "src/lib/format.js",
+        "src/content/popover.js",
+        "src/content/content.js"
+      ],
+      "css": ["src/content/content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
