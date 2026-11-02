@@ -25,6 +25,8 @@ npm test
 
 Runs the unit tests for `src/lib` with Node's built-in test runner (Node 22.8+). No dependencies, no build.
 
+Icons: edit `scripts/make-icons.js`, then run `node scripts/make-icons.js` to regenerate `icons/`.
+
 ## Manual test checklist
 
 - [ ] Cards show ⭐ ❌; clicking them never opens the listing or flips photos.
