@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const { createStore, reasonLabel, OTHER_ID } = globalThis.THS;
+  const { createStore, reasonLabel } = globalThis.THS;
 
   const store = createStore(chrome.storage.local);
   const $ = (id) => document.getElementById(id);
@@ -105,28 +105,24 @@
     const input = el('input', { value: reason.label, maxLength: 40 });
     input.setAttribute('aria-label', `Rename ${reason.label}`);
     input.addEventListener('change', () => run(store.renameReason(reason.id, input.value)));
-    const row = el('li', {}, input, el('span', { className: 'muted', textContent: used ? `${used} used` : '' }));
-
-    if (reason.id !== OTHER_ID) {
-      const armed = state.confirmDelete === reason.id;
-      const del = el('button', {
-        type: 'button',
-        className: armed ? 'danger' : 'icon',
-        title: 'Delete reason',
-        textContent: armed ? `Delete? (used ${used}×)` : '🗑',
-      });
-      del.addEventListener('click', () => {
-        if (used && !armed) {
-          state.confirmDelete = reason.id;
-          render();
-          return;
-        }
-        state.confirmDelete = null;
-        run(store.deleteReason(reason.id));
-      });
-      row.append(del);
-    }
-    return row;
+    const armed = state.confirmDelete === reason.id;
+    const del = el('button', {
+      type: 'button',
+      className: armed ? 'danger' : 'icon',
+      title: 'Delete reason',
+      textContent: armed ? `Delete? (used ${used}×)` : '🗑',
+    });
+    del.addEventListener('click', () => {
+      if (used && !armed) {
+        state.confirmDelete = reason.id;
+        render();
+        return;
+      }
+      state.confirmDelete = null;
+      run(store.deleteReason(reason.id));
+    });
+    const count = el('span', { className: 'muted', textContent: used ? `${used} used` : '' });
+    return el('li', {}, input, count, del);
   }
 
   async function checkPage() {

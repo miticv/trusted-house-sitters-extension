@@ -103,7 +103,7 @@ test('renameReason renames and validates', async () => {
   await assert.rejects(store.renameReason('nope', 'X'), /Unknown reason/);
 });
 
-test('deleteReason strips the reason from marks, falling back to Other', async () => {
+test('deleteReason strips the reason from marks and leaves them otherwise unchanged', async () => {
   const { store } = setup();
   await store.setNotInterested('1', { reasons: ['too_far', 'dates'] });
   await store.setNotInterested('2', { reasons: ['too_far'] });
@@ -111,14 +111,22 @@ test('deleteReason strips the reason from marks, falling back to Other', async (
   await store.deleteReason('too_far');
   const marks = await store.getMarks();
   assert.deepEqual(marks['1'].reasons, ['dates']);
-  assert.deepEqual(marks['2'].reasons, ['other']);
+  assert.deepEqual(marks['2'].reasons, []);
+  assert.equal(marks['2'].status, 'not_interested');
   assert.deepEqual(marks['3'].reasons, []);
   assert.ok(!(await store.getReasons()).some((r) => r.id === 'too_far'));
 });
 
-test('the Other reason cannot be deleted', async () => {
-  const { store } = setup();
-  await assert.rejects(store.deleteReason('other'), /cannot be deleted/);
+test('an existing Other reason is deletable like any other', async () => {
+  const { store } = setup({ reasons: [{ id: 'other', label: 'Other' }], marks: {} });
+  await store.setNotInterested('1', { reasons: ['other'] });
+  await store.deleteReason('other');
+  assert.deepEqual(await store.getReasons(), []);
+  assert.deepEqual((await store.getMarks())['1'].reasons, []);
+});
+
+test('default reasons have no catch-all Other', () => {
+  assert.ok(!DEFAULT_REASONS.some((r) => r.id === 'other'));
 });
 
 test('exportData returns version, marks and reasons', async () => {
@@ -165,10 +173,10 @@ test('import replace overwrites everything', async () => {
   assert.deepEqual(Object.keys(await store.getMarks()), ['9']);
 });
 
-test('import adds the Other reason when the file lacks it', async () => {
+test('import keeps the file reasons exactly', async () => {
   const { store } = setup();
   await store.importData(file({}, [{ id: 'x', label: 'X' }]), 'replace');
-  assert.deepEqual((await store.getReasons()).map((r) => r.id), ['x', 'other']);
+  assert.deepEqual((await store.getReasons()).map((r) => r.id), ['x']);
 });
 
 test('invalid import files are rejected and nothing changes', async () => {
