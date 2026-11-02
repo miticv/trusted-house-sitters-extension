@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "THS Listing Marker",
+  "name": "Sit Listing Marker for TrustedHousesitters (unofficial)",
   "version": "0.1.0",
-  "description": "Mark TrustedHousesitters sit listings as interested or not interested, and see those marks on every search.",
+  "description": "Unofficial: mark TrustedHousesitters sit listings as interested or not interested, and see your marks on every search.",
   "permissions": ["storage"],
   "icons": {
     "16": "icons/icon-16.png",
@@ -11,7 +11,7 @@
     "128": "icons/icon-128.png"
   },
   "action": {
-    "default_title": "THS Listing Marker",
+    "default_title": "Sit Listing Marker",
     "default_popup": "src/popup/popup.html",
     "default_icon": {
       "16": "icons/icon-16.png",
