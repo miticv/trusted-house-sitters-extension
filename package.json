@@ -4,6 +4,6 @@
   "private": true,
   "description": "Chrome extension to mark TrustedHousesitters listings as interested / not interested",
   "scripts": {
-    "test": "node --test \"test/*.test.js\""
+    "test": "node --test --test-isolation=none \"test/*.test.js\""
   }
 }
