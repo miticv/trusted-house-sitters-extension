@@ -11,6 +11,10 @@
     return match ? match[1] : null;
   }
 
-  THS.listingIdFromHref = listingIdFromHref;
-  if (typeof module !== 'undefined') module.exports = { listingIdFromHref };
+  function isSearchPath(pathname) {
+    return pathname.startsWith('/house-and-pet-sitting-assignments/') && listingIdFromHref(pathname) === null;
+  }
+
+  Object.assign(THS, { listingIdFromHref, isSearchPath });
+  if (typeof module !== 'undefined') module.exports = { listingIdFromHref, isSearchPath };
 })(globalThis);

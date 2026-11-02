@@ -12,6 +12,11 @@
     current = null;
   }
 
+  // Enter saves only from the popover itself or a chip; on a button it must do what that button says.
+  function isSaveKeyTarget(target, popoverEl) {
+    return target === popoverEl || Boolean(target.classList?.contains('ths-ext-chip'));
+  }
+
   function actionButton(label, className, onClick) {
     const button = document.createElement('button');
     button.type = 'button';
@@ -89,7 +94,7 @@
       if (e.key === 'Escape') {
         e.preventDefault();
         closePopover();
-      } else if (e.key === 'Enter' && e.target !== note && el.contains(e.target)) {
+      } else if (e.key === 'Enter' && isSaveKeyTarget(e.target, el)) {
         e.preventDefault();
         save.click();
       }
@@ -101,4 +106,5 @@
   }
 
   Object.assign(THS, { openPopover, closePopover });
+  if (typeof module !== 'undefined') module.exports = { isSaveKeyTarget };
 })(globalThis);

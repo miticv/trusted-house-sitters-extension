@@ -37,3 +37,13 @@ test('non-string input returns null', () => {
   assert.equal(listingIdFromHref(undefined), null);
   assert.equal(listingIdFromHref(null), null);
 });
+
+const { isSearchPath } = require('../src/lib/listing-id.js');
+
+test('isSearchPath is true only for sit search pages', () => {
+  assert.equal(isSearchPath('/house-and-pet-sitting-assignments/'), true);
+  assert.equal(isSearchPath('/house-and-pet-sitting-assignments/australia/western-australia/'), true);
+  assert.equal(isSearchPath('/house-and-pet-sitting-assignments/australia/western-australia/mandurah/l/1609804/'), false);
+  assert.equal(isSearchPath('/inbox/123/'), false);
+  assert.equal(isSearchPath('/'), false);
+});

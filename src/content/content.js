@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const { listingIdFromHref, createStore, badgeLabel, badgeTitle, openPopover } = globalThis.THS;
+  const { listingIdFromHref, isSearchPath, createStore, badgeLabel, badgeTitle, openPopover } = globalThis.THS;
 
   const store = createStore(chrome.storage.local);
   const CARD_SELECTOR = '[data-testid="ListingCard__container"]';
@@ -53,7 +53,8 @@
 
   function findCards() {
     const cards = [...document.querySelectorAll(CARD_SELECTOR)];
-    if (cards.length || isDetailPage()) return cards;
+    // The fallback climbs to the largest single-listing ancestor, which off the search pages can be the whole page.
+    if (cards.length || !isSearchPath(location.pathname)) return cards;
     return findCardsFallback();
   }
 
@@ -215,7 +216,7 @@
     if (msg?.type !== 'ths-ext-status') return;
     sendResponse({
       count: cardCount,
-      isSearch: location.pathname.startsWith('/house-and-pet-sitting-assignments/'),
+      isSearch: isSearchPath(location.pathname),
       isDetail: isDetailPage(),
     });
   });
@@ -223,6 +224,12 @@
   (async () => {
     [marks, reasons] = await Promise.all([store.getMarks(), store.getReasons()]);
     scan();
-    new MutationObserver(scheduleScan).observe(document.body, { childList: true, subtree: true });
+    // href changes catch pages where React reuses card elements and only swaps the link; our own writes never touch href.
+    new MutationObserver(scheduleScan).observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['href'],
+    });
   })().catch((err) => console.error('[ths-ext]', err));
 })();
