@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>THS Listing Marker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>THS Listing Marker</h1>
+    <p id="counts"></p>
+  </header>
+  <p id="warning" class="warning" hidden>No listing cards detected on this page. The site layout may have changed.</p>
+
+  <nav class="tabs" role="tablist">
+    <button type="button" role="tab" data-tab="not_interested">Not interested</button>
+    <button type="button" role="tab" data-tab="interested">Interested</button>
+    <button type="button" role="tab" data-tab="reasons">Reasons</button>
+  </nav>
+
+  <section id="list-view">
+    <div class="filters">
+      <input id="filter-text" type="search" placeholder="Filter by title, location, note">
+      <select id="filter-reason" aria-label="Filter by reason"></select>
+    </div>
+    <ul id="list"></ul>
+    <p id="empty" class="muted" hidden>Nothing here yet.</p>
+  </section>
+
+  <section id="reasons-view" hidden>
+    <ul id="reason-list"></ul>
+    <form id="add-reason">
+      <input id="new-reason" placeholder="New reason" maxlength="40" aria-label="New reason">
+      <button type="submit">Add</button>
+    </form>
+  </section>
+
+  <footer>
+    <button type="button" id="export">Export</button>
+    <button type="button" id="import">Import</button>
+    <input id="import-file" type="file" accept="application/json,.json" hidden>
+    <span id="import-choice" hidden>
+      <button type="button" id="import-merge">Merge</button>
+      <button type="button" id="import-replace">Replace all</button>
+    </span>
+    <p id="message" role="status"></p>
+  </footer>
+
+  <script src="../lib/listing-id.js"></script>
+  <script src="../lib/store.js"></script>
+  <script src="../lib/format.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

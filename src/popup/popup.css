@@ -1,0 +1,38 @@
+:root { color-scheme: light; font: 13px/1.4 system-ui, sans-serif; color: #222; }
+body { width: 380px; margin: 0; padding: 10px 12px; background: #fff; }
+body.in-tab { width: auto; max-width: 720px; margin: 0 auto; padding: 24px; }
+[hidden] { display: none !important; }
+input, select, button { font: inherit; }
+
+header { display: flex; justify-content: space-between; align-items: baseline; }
+h1 { margin: 0; font-size: 15px; }
+#counts { margin: 0; color: #555; }
+.warning { padding: 6px 8px; border-radius: 6px; background: #fff4e5; color: #8a4b00; }
+
+.tabs { display: flex; gap: 4px; margin: 10px 0 8px; border-bottom: 1px solid #ddd; }
+.tabs button { padding: 6px 10px; border: none; border-bottom: 2px solid transparent; background: none; color: #555; cursor: pointer; }
+.tabs button[aria-selected="true"] { border-bottom-color: #222; color: #222; font-weight: 600; }
+
+.filters { display: flex; gap: 6px; margin-bottom: 8px; }
+.filters input { flex: 1; }
+
+ul { max-height: 360px; margin: 0; padding: 0; overflow-y: auto; list-style: none; }
+body.in-tab ul { max-height: none; }
+li { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid #eee; }
+li .body { flex: 1; min-width: 0; }
+.title { color: #1a4fa0; font-weight: 600; text-decoration: none; }
+.meta, .muted { color: #777; font-size: 12px; }
+.note { color: #444; font-style: italic; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+.chip { padding: 1px 8px; border-radius: 10px; background: #fde7e7; color: #8e1c1c; font-size: 12px; }
+
+button.icon { border: none; background: none; font-size: 14px; cursor: pointer; }
+button.danger { border: 1px solid #c62828; border-radius: 6px; background: #fff; color: #c62828; cursor: pointer; }
+#reason-list li { align-items: center; }
+#reason-list input { flex: 1; }
+#add-reason { display: flex; gap: 6px; margin-top: 8px; }
+#add-reason input { flex: 1; }
+
+footer { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid #ddd; }
+#message { flex-basis: 100%; min-height: 1em; margin: 4px 0 0; color: #2e7d32; }
+#message.error { color: #c62828; }
