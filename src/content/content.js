@@ -158,10 +158,41 @@
     paint(ctrl, mark);
   }
 
+  let bar = null;
+
+  function detailTarget() {
+    const id = listingIdFromHref(location.href);
+    if (!id) return null;
+    return {
+      id,
+      meta: {
+        url: location.href.split(/[?#]/)[0],
+        title: document.querySelector('h1')?.innerText.trim() || '',
+        location: '',
+      },
+    };
+  }
+
+  function renderBar() {
+    const id = listingIdFromHref(location.href);
+    if (!id) {
+      bar?.root.remove();
+      bar = null;
+      return;
+    }
+    if (!bar || !document.body.contains(bar.root)) {
+      bar = buildControls(detailTarget);
+      bar.root.id = 'ths-ext-bar';
+      document.body.append(bar.root);
+    }
+    paint(bar, marks[id]);
+  }
+
   function scan() {
     const cards = findCards();
     cardCount = cards.length;
     cards.forEach(renderCard);
+    renderBar();
   }
 
   let scanTimer = 0;
@@ -178,6 +209,15 @@
     if (changes.marks) marks = changes.marks.newValue || {};
     if (changes.reasons) reasons = changes.reasons.newValue || [];
     scan();
+  });
+
+  chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+    if (msg?.type !== 'ths-ext-status') return;
+    sendResponse({
+      count: cardCount,
+      isSearch: location.pathname.startsWith('/house-and-pet-sitting-assignments/'),
+      isDetail: isDetailPage(),
+    });
   });
 
   (async () => {
