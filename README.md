@@ -48,5 +48,5 @@ To update: unzip the new version over the same folder and click ↻ on the exten
 - [ ] "Recommended sits" strip is decorated.
 - [ ] Listing page pill works; marks made there show on search cards.
 - [ ] Two tabs update together.
-- [ ] Popup lists, filters, deletes; reasons add/rename/delete (Other not deletable).
+- [ ] Popup lists, filters, deletes; reasons add/rename/delete.
 - [ ] Export, then import (merge) round-trips; a broken file is rejected with no changes.

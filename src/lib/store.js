@@ -2,7 +2,7 @@
   'use strict';
   const THS = (root.THS = root.THS || {});
 
-  const OTHER_ID = 'other';
+  // No catch-all "Other": the free-text note covers it.
   const DEFAULT_REASONS = [
     { id: 'too_far', label: 'Too far' },
     { id: 'dates', label: "Dates don't fit" },
@@ -10,7 +10,6 @@
     { id: 'pet_type', label: 'Pet type' },
     { id: 'length', label: 'Too long / too short' },
     { id: 'needs_car', label: 'Needs car' },
-    { id: OTHER_ID, label: 'Other' },
   ];
 
   function cleanLabel(label) {
@@ -52,7 +51,6 @@
       }
       return { id: r.id, label: r.label };
     });
-    if (!reasons.some((r) => r.id === OTHER_ID)) reasons.push({ id: OTHER_ID, label: 'Other' });
 
     const marks = {};
     for (const [id, m] of Object.entries(data.marks)) {
@@ -144,13 +142,10 @@
     }
 
     async function deleteReason(id) {
-      if (id === OTHER_ID) throw new Error('The "Other" reason cannot be deleted');
       const reasons = (await getReasons()).filter((r) => r.id !== id);
       const marks = await getMarks();
       for (const mark of Object.values(marks)) {
-        if (!mark.reasons.includes(id)) continue;
         mark.reasons = mark.reasons.filter((r) => r !== id);
-        if (mark.status === 'not_interested' && mark.reasons.length === 0 && !mark.note) mark.reasons = [OTHER_ID];
       }
       await area.set({ reasons, marks });
     }
@@ -193,6 +188,6 @@
     };
   }
 
-  Object.assign(THS, { createStore, parseExport, DEFAULT_REASONS, OTHER_ID });
-  if (typeof module !== 'undefined') module.exports = { createStore, parseExport, DEFAULT_REASONS, OTHER_ID };
+  Object.assign(THS, { createStore, parseExport, DEFAULT_REASONS });
+  if (typeof module !== 'undefined') module.exports = { createStore, parseExport, DEFAULT_REASONS };
 })(globalThis);
