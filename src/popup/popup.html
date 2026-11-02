@@ -16,6 +16,7 @@
     <button type="button" role="tab" data-tab="not_interested">Not interested</button>
     <button type="button" role="tab" data-tab="interested">Interested</button>
     <button type="button" role="tab" data-tab="reasons">Reasons</button>
+    <button type="button" role="tab" data-tab="backup">Backup</button>
   </nav>
 
   <section id="list-view">
@@ -35,16 +36,20 @@
     </form>
   </section>
 
-  <footer>
-    <button type="button" id="export">Export</button>
-    <button type="button" id="import">Import</button>
-    <input id="import-file" type="file" accept="application/json,.json" hidden>
-    <span id="import-choice" hidden>
-      <button type="button" id="import-merge">Merge</button>
-      <button type="button" id="import-replace">Replace all</button>
-    </span>
-    <p id="message" role="status"></p>
-  </footer>
+  <section id="backup-view" hidden>
+    <p class="muted">Your marks live only in this browser. Export saves them and your reasons to a JSON file. Import loads a file back, merging with or replacing what is here (it opens in a tab).</p>
+    <div class="backup-actions">
+      <button type="button" id="export">Export</button>
+      <button type="button" id="import">Import</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+      <span id="import-choice" hidden>
+        <button type="button" id="import-merge">Merge</button>
+        <button type="button" id="import-replace">Replace all</button>
+      </span>
+    </div>
+  </section>
+
+  <p id="message" role="status"></p>
 
   <script src="../lib/listing-id.js"></script>
   <script src="../lib/store.js"></script>

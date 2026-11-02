@@ -15,7 +15,7 @@ Chrome extension for [TrustedHousesitters](https://www.trustedhousesitters.com/h
 - Hover a card: ⭐ marks interested (click again to clear). ❌ opens reason chips plus an optional note. Enter saves, Esc cancels.
 - Rejected cards are dimmed with a red badge; hover the badge for all reasons and the note.
 - On a listing's own page, the same controls sit in a pill at the bottom-right.
-- Toolbar popup: browse/filter your marks, edit reason chips, export/import a JSON backup (import opens in a tab).
+- Toolbar popup: browse/filter your marks, edit reason chips, and back them up on the **Backup** tab (JSON export/import; import opens in a tab).
 
 Marks live in `chrome.storage.local` on this machine only. Export regularly if you care about them.
 
